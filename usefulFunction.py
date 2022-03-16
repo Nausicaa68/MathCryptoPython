@@ -21,9 +21,13 @@ def calculate_a_determinant(matrix):
 
 
 def is_invertible_in_n(matrix, n):
+    print(calculate_a_determinant(matrix), " gcd ", n, " = ",
+          math.gcd(calculate_a_determinant(matrix), n))
     if(math.gcd(calculate_a_determinant(matrix), n) == 1):
+        print("la matrice est invertible")
         return True
     else:
+        print("la matrice n'est pas invertible")
         return False
 
 
@@ -102,6 +106,29 @@ def decipher(text, Amatrix, Bmatrix, n):
     return decipher_text
 
 
+def main_deciphering_vigenere(Amat, Bmat, n):
+    determinant = calculate_a_determinant(Amat)
+    print("Determinant de A : ", determinant)
+    if(is_invertible_in_n(Amat, n) == True):
+        print("Deciphering function : ")
+        invertAmat = invert_matrix_in_a_ring(Amat, n)
+        print(Amat, "-1  = ", determinant, "-1 * ", invertAmat)
+        invertDeterminant = invert_a_number_in_a_ring(determinant, n)
+        print(" = ", invertDeterminant, " * ", invertAmat)
+        newAmat = new_A_matrix(invertAmat, n)
+        newAmat = mult_matrix_with_a_number(newAmat, invertDeterminant)
+        print(" = ", newAmat)
+        
+
+        newBmat = mult_matrix_4_time_2(newAmat, Bmat)
+        print("Bmat = ", newBmat)
+        newBmat = mult_matrix_with_a_number(newBmat, -1)
+        print(" = ", newBmat)
+
+    else:
+        return 0
+
+
 print(invert_a_number_in_a_ring(63, 10))  # waiting : 7
 mat = [2, 11, 7, 8]
 print(calculate_a_determinant(mat))  # waiting : -61
@@ -140,3 +167,5 @@ matTest1 = [3, 0, 9, 0, 1, 6, 4, 3, 1]
 print(is_invertible_in_n(matTest1, 12))  # waiting : false
 matTest1 = [0, 7, 2, 3, 4, 0, 8, 0, 2]
 print(is_invertible_in_n(matTest1, 9))  # waiting : true
+
+main_deciphering_vigenere(Amat, Bmat, N)
