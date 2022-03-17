@@ -14,7 +14,7 @@ def ask_for_matrix(nbValue):
 choice = 0
 while(choice != 99):
 
-    print("What do you want to do : ")
+    print("What do you want to do (test git) : ")
     print(" - ")
     print("1 - Determinant")
     print("2 - Matrice Invertible ?")
