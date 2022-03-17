@@ -1,13 +1,6 @@
 import math
 from matrixFunction import *
-
-
-def invert_a_number_in_a_ring(number, n, s=1, t=0, N=0):
-    return (n < 2 and t % N or invert_a_number_in_a_ring(n, number % n, t, s-number//n*t, N or n), -1)[n < 1]
-
-
-def bring_a_number_in_a_ring(number, n):
-    return number % n
+from chap1Function import *
 
 
 def is_invertible_in_n(matrix, n):
@@ -91,7 +84,7 @@ def transform_numbers_in_a_text(textMat):
     return text
 
 
-def decipher(text, Amatrix, Bmatrix, n):
+def cipherVigenere(text, Amatrix, Bmatrix, n):
     decipher_text = []
 
     print("Deciphering : ", text, "\n")
@@ -128,7 +121,7 @@ def main_deciphering_vigenere(Amat, Bmat, n, text):
         newBmat = new_B_matrix(newAmat, Bmat, n)
         print(" ")
 
-        decrypt = decipher(text, newAmat, newBmat, n)
+        decrypt = cipherVigenere(text, newAmat, newBmat, n)
         print(decrypt)
 
         return decrypt
@@ -168,8 +161,7 @@ def main_chap2():
     choice = 0
     while(choice != 99):
 
-        print("What do you want to do : ")
-        print(" - ")
+        print("What do you want to do : \n")
         print("1 - Determinant")
         print("2 - Matrice Invertible ?")
         print("3 - Viginere with text")
@@ -177,8 +169,9 @@ def main_chap2():
         print("5 - Encipher in Cesar")
         print("6 - decipher in Cesar with text")
         print("7 - decipher in Cesar with number")
+        print("8 - Encipher in Viginere")
 
-        print("99 - Quit")
+        print("\n99 - Quit\n")
 
         choice = int(input("Choice : "))
 
@@ -268,6 +261,22 @@ def main_chap2():
             print("\n")
             ciphering_cesar(decKeyA, decKeyB, ring, text)
 
+        elif(choice == 8):
+            ring = int(input("Ring : "))
+
+            print("Matrice A : ")
+            Amat = ask_for_matrix(4)
+            print("Matrice B : ")
+            Bmat = ask_for_matrix(2)
+
+            text = input("Text : ")
+
+            print("\n")
+            textMat = transform_a_text_in_number(text)
+            enc = cipherVigenere(textMat, Amat, Bmat, ring)
+            transform_numbers_in_a_text(enc)
+            
+
         elif(choice == 99):
             print("Bye")
 
@@ -279,17 +288,16 @@ def main_chap2():
 
 if __name__ == "__main__":
 
-    N = 26
-    Amat = [2, 11, 7, 8]
-    Bmat = [12, 20]
+    # N = 26
+    # Amat = [2, 11, 7, 8]
+    # Bmat = [12, 20]
 
-    print(invert_a_number_in_a_ring(63, 10))  # waiting : 7
-    print(invert_matrix_in_a_ring(Amat, 26))  # waiting : [8,15,19,2]
+    # print(invert_matrix_in_a_ring(Amat, 26))  # waiting : [8,15,19,2]
 
-    newAmat = new_A_matrix(Amat, N)
-    newBmat = new_B_matrix(newAmat, Bmat, N)
-    print(newAmat)  # waiting : [2,7,21,20]
-    print(newBmat)  # waiting : [18,24]
+    # newAmat = new_A_matrix(Amat, N)
+    # newBmat = new_B_matrix(newAmat, Bmat, N)
+    # print(newAmat)  # waiting : [2,7,21,20]
+    # print(newBmat)  # waiting : [18,24]
 
     # matTest1 = [2, 13, 10, 12]
     # print(is_invertible_in_n(matTest1, 15))  # waiting : true
@@ -315,3 +323,5 @@ if __name__ == "__main__":
     # print(decipher_text)
 
     # print(transform_numbers_in_a_text(decipher_text))
+
+    print()
