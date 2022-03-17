@@ -107,31 +107,6 @@ def new_B_matrix(newAmat, Bmat, n):
     return newMat
 
 
-"""
-def decipher(text, Amatrix, Bmatrix, n):
-    decipher_text = ""
-    text = text.lower()
-
-    print("Deciphering : ", text, "\n")
-
-    for i in range(0, len(text), 2):
-        cypherMat = [ord(text[i]) - 97, ord(text[i+1]) - 97]
-
-        print(cypherMat, end="")
-
-        res = mult_matrix_4_time_2(Amatrix, cypherMat)
-        res = add_matrix_2_and_2(res, Bmatrix)
-
-        for i in range(len(res)):
-            res[i] = bring_a_number_in_a_ring(res[i], n)
-            decipher_text += chr(res[i]+97)
-
-        print(" -> ", res)
-
-    return decipher_text
-"""
-
-
 def transform_a_text_in_number(text):
     textMat = []
     text = text.lower()
@@ -154,7 +129,7 @@ def transform_numbers_in_a_text(textMat):
     return text
 
 
-def decipher_with_number(text, Amatrix, Bmatrix, n):
+def decipher(text, Amatrix, Bmatrix, n):
     decipher_text = []
 
     print("Deciphering : ", text, "\n")
@@ -191,7 +166,7 @@ def main_deciphering_vigenere(Amat, Bmat, n, text):
         newBmat = new_B_matrix(newAmat, Bmat, n)
         print(" ")
 
-        decrypt = decipher_with_number(text, newAmat, newBmat, n)
+        decrypt = decipher(text, newAmat, newBmat, n)
         print(decrypt)
 
         return decrypt
@@ -200,18 +175,15 @@ def main_deciphering_vigenere(Amat, Bmat, n, text):
         return 0
 
 
-def ciphering_cesar(keyA, keyB, n, text):
-    text = text.lower()
-    encipher_text = ""
+def ciphering_cesar(keyA, keyB, n, textMat):
+    encipher_text = []
 
-    for i in range(len(text)):
-        print(text[i], " = ", (ord(text[i]) - 97), end="")
-        result = keyA * (ord(text[i]) - 97) + keyB
-        print(" = ", result, end="")
+    for i in range(len(textMat)):
+        result = keyA * textMat[i] + keyB
+        print(textMat[i], " = ", result, end="")
         result = bring_a_number_in_a_ring(result, n)
-        print(" = ", result, " = ", (chr(result + 97)),  end="")
-        encipher_text += chr(result + 97)
-        print("")
+        print(" = ", result)
+        encipher_text.append(result)
 
     print(encipher_text)
 
@@ -220,8 +192,11 @@ def ciphering_cesar(keyA, keyB, n, text):
 
 def calc_deciphering_key_cesar(keyA, keyB, n):
     decipherKeyA = invert_a_number_in_a_ring(keyA, n)
+    print(keyA, " -> ", decipherKeyA)
     decipherKeyB = decipherKeyA*keyB*(-1)
+    print(keyB, " -> ", decipherKeyB, " -> ", end="")
     decipherKeyB = bring_a_number_in_a_ring(decipherKeyB, n)
+    print(decipherKeyB)
 
     return decipherKeyA, decipherKeyB
 
