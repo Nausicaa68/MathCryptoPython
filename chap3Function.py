@@ -21,6 +21,7 @@ def totient_faster(n, show=0):
             print(n, "is prime : Phi(", n, ") = ", n, "- 1 = ", phiN)
     else:
         allPrimeFactor = prime_factors(n)
+        print(allPrimeFactor)
         if(checkPairwiseCoPrime(allPrimeFactor)):
             if(show != 0):
                 print("Phi(", n, ") = ", end="")
@@ -35,6 +36,9 @@ def totient_faster(n, show=0):
 
             if(show != 0):
                 print(" = ", phiN)
+
+        else:
+            print("cheh")
 
     return phiN
 
