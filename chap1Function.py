@@ -111,3 +111,5 @@ if __name__ == "__main__":
     list2 = [2, 6, 7]
     print(checkPairwiseCoPrime(list1))  # waiting : true
     print(checkPairwiseCoPrime(list2))  # waiting : false
+
+    
