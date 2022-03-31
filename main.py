@@ -1,7 +1,19 @@
-from telnetlib import X3PAD
 from chap2Function import *
 from chap3Function import *
 
+def pow_mod(x, y, modulo):
+    if y == 0:
+        return 1
+    elif y == 1:
+        return x % modulo
+    else:
+        root = pow_mod(x, y // 2, modulo)
+        if y % 2 == 0:
+            return (root * root) % modulo
+        else:
+            return (root * root * x) % modulo
+            
+#convert the deciphered number to base 29 on 5 digits
 def five_letters_RSA(decipherednumber):
     one_mult = pow(29, 4) #first digit multiplier
     two_mult = pow(29, 3) #second digit multiplier
@@ -14,7 +26,7 @@ def five_letters_RSA(decipherednumber):
     three = 0
     four = 0
     five = 0
-
+    #it's like a conversion to base 29
     while(decipherednumber>= one_mult):
         decipherednumber-= one_mult
         one += 1
@@ -126,10 +138,11 @@ def check_if_prime(num):
 
 
 if __name__ == "__main__":
-    #main_chap2()
+
     exercise_22()
 
-    #print (int(primefactors(73277933)))
+    print("\nDecomposition in prime factors of the nA : ")
+    primefactors(73277933)
     check_if_prime(1493)
     check_if_prime(49081)
  
