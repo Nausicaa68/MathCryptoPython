@@ -176,40 +176,43 @@ def check_authentification_signature_from_A_by_B(publicKeyA, publicKeyB, yAB, dB
 
 if __name__ == "__main__":
 
-    # print(totient(14, 1))  # waiting : 6
-    # print(totient_faster(15, 1))  # waiting : 8
+    # # print(totient(14, 1))  # waiting : 6
+    # # print(totient_faster(15, 1))  # waiting : 8
 
-    # print(calculate_RSA_key(23, 17, 43, 1))  # waiting : [ [391,43],[391,131] ]
-    # print(cipher_in_RSA([164, 28], [391, 43], 1))  # waiting : 284
-    # print(cipher_in_RSA([284, 267], [391, 131], 1))  # waiting : 164
+    # # print(calculate_RSA_key(23, 17, 43, 1))  # waiting : [ [391,43],[391,131] ]
+    # # print(cipher_in_RSA([164, 28], [391, 43], 1))  # waiting : 284
+    # # print(cipher_in_RSA([284, 267], [391, 131], 1))  # waiting : 164
 
-    #M = 115792089237316195423570985008687907853269984665640564039457584007908834671663
-    #E = 96514807760119017459957299373576180339312098253841362800539826362414936958669
-    #print(pow_mod(2, E, M))
-    #print(pow_mod(164, 43, 391))
+    # #M = 115792089237316195423570985008687907853269984665640564039457584007908834671663
+    # #E = 96514807760119017459957299373576180339312098253841362800539826362414936958669
+    # #print(pow_mod(2, E, M))
+    # #print(pow_mod(164, 43, 391))
 
-    # print(cipher_in_RSA([624345], [303632003, 1025771], 1))  # waiting : 164
+    # # print(cipher_in_RSA([624345], [303632003, 1025771], 1))  # waiting : 164
 
-    # is_RSA_key_ok([47, 23])
-    # is_RSA_key_ok([143, 5])
-    # is_RSA_key_ok([143, 47])
-    # is_RSA_key_ok([143, 47], 29)
-    # is_RSA_key_ok([143, 17], 113)
+    # # is_RSA_key_ok([47, 23])
+    # # is_RSA_key_ok([143, 5])
+    # # is_RSA_key_ok([143, 47])
+    # # is_RSA_key_ok([143, 47], 29)
+    # # is_RSA_key_ok([143, 17], 113)
 
-    print(generating_authentification_signature_from_A_to_B(
-        [209, 107], [143, 17], 103, 143, 1))  # waiting : 114
+    # print(generating_authentification_signature_from_A_to_B(
+    #     [209, 107], [143, 17], 103, 143, 1))  # waiting : 114
 
-    print(check_authentification_signature_from_A_by_B(
-        [209, 107], [143, 17], 114, 113, 1))  # waiting : 103
+    # print(check_authentification_signature_from_A_by_B(
+    #     [209, 107], [143, 17], 114, 113, 1))  # waiting : 103
 
-    alice = [209, 13]
-    bob = [221, 25]
-    dAlice = 97
-    dBob = 169
-    sAlice = 10
-    sBob = 21
+    # alice = [209, 13]
+    # bob = [221, 25]
+    # dAlice = 97
+    # dBob = 169
+    # sAlice = 10
+    # sBob = 21
 
-    print(generating_authentification_signature_from_A_to_B(
-        alice, bob, sAlice, dAlice))  # waiting : 186
-    print(check_authentification_signature_from_A_by_B(
-        alice, bob, 186, dBob))  # waiting : 10
+    # print(generating_authentification_signature_from_A_to_B(
+    #     alice, bob, sAlice, dAlice))  # waiting : 186
+    # print(check_authentification_signature_from_A_by_B(
+    #     alice, bob, 186, dBob))  # waiting : 10
+
+    print(calculate_RSA_key())
+

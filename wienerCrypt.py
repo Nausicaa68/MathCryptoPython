@@ -100,8 +100,7 @@ def print_convergents(maximum=0):
             print(" = ", conv_cfi[2][len(conv_cfi[2])-1])
             print(" = ", Fraction(conv_cfi[2][len(conv_cfi[2])-1]))
 
-
-            #for j in range(len(conv_cfi[0])):
+            # for j in range(len(conv_cfi[0])):
             #    print(conv_cfi[0][j], "/", conv_cfi[1][j], end="")
             #    if(j != len(conv_cfi[0]) - 1):
             #        print(" + ", end="")
@@ -165,54 +164,70 @@ def break2(publicKey):
 
     print(cf_)
 
-def check_number_complete(number):
-    
-    return((number-int(number))==0)  #return true or false
 
-def get_phi_n(e,d,k):
+def check_number_complete(number):
+    print(number)
+    return ((number-int(number)) == 0)  # return true or false
+
+
+def get_phi_n(e, d, k):
     return (((e*d)-1)/k)
 
-def is_phi_ok(e,d,k):
-    phi_n = get_phi_n(e,d,k)
+
+def is_phi_ok(e, d, k):
+    phi_n = get_phi_n(e, d, k)
     return(check_number_complete(phi_n))
 
-#tells if the solutions of the quadratic equation are complete
-def quadratic_equation(N,phi_n):
+# tells if the solutions of the quadratic equation are complete
+
+
+def quadratic_equation(N, phi_n):
     a = 1
-    b = N-phi_n+1
+    b = (-1)*(N-phi_n+1)
     c = N
     det = b*b-(4*a*c)
+    print("det=", det)
     if(det == 0):
-        #one solution
+        # one solution
         x = (-b)*(2*a)
         return(check_number_complete(x))
-    elif(det>0):
+    elif(det > 0):
         x1 = ((-b)-sqrt(det))/(2*a)
         x2 = ((-b)+sqrt(det))/(2*a)
+        x1 = x1.real
+        x2 = x2.real
+        print("x1=", x1, "x2=", x2)
         if(check_number_complete(x1) and check_number_complete(x2)):
             return True
         else:
             return False
     else:
-        #pas de solution réelle
+        # pas de solution réelle
         return False
 
-#we check for each convergent if it's the right d
-def check_if_good_d(convergent):
-    d=1
-    e=1
-    k=1
-    N=1
-    phi_n=get_phi_n(e,d,k)
-    
-    #d has to be odd
-    if(d%2==0):
-        return False
-    #then check if phi_n is complete
-    if(is_phi_ok(e,d,k)==False):
-        return False
-    #then check that the quadratic equation is ok
-    return(quadratic_equation(N,phi_n))
+# we check for each convergent if it's the right d
+
+
+def check_if_good_d(convergent, e, N):
+
+    for i in range(1, len(convergent[1])):
+        print(i)
+        d = convergent[1][i]
+        e = e
+        k = convergent[0][i]
+        N = N
+        phi_n = get_phi_n(e, d, k)
+
+        # d has to be odd
+        if(d % 2 != 0):
+            # then check if phi_n is complete
+            if(is_phi_ok(e, d, k) == True):
+                # then check that the quadratic equation is ok
+                if(quadratic_equation(N, phi_n) == True):
+                    return d
+
+    return "error"
+
 
 if __name__ == "__main__":
     print("Wiener Cryptanalysis")
@@ -228,8 +243,17 @@ if __name__ == "__main__":
     #print(break_RSA([2621, 8927]))
 
     #print(break2([17993, 90581]))
-    #table(100)
-    #print_convergents(50)
-    #print((Fraction(0.25)+Fraction(0.25))[0])
+    # table(100)
+    # print_convergents(50)
+    # print((Fraction(0.25)+Fraction(0.25))[0])
 
 
+    e = 1338757187
+    N = 2008226257
+
+    x = e/N
+    cf_ = continuous_fraction(x)
+    print("cf_", cf_)
+    conv = convergents(cf_)
+    print("conv=", conv)
+    print("d=", check_if_good_d(conv, e, N))
