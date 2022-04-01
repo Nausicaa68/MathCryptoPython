@@ -1,8 +1,11 @@
-from cmath import log
+from cmath import log, sqrt
 import cmath
+import fractions
+import imp
 import math
 import re
 from turtle import pu
+from fractions import Fraction
 
 
 def is_square(a):
@@ -95,6 +98,13 @@ def print_convergents(maximum=0):
                     print(" + ", end="")
 
             print(" = ", conv_cfi[2][len(conv_cfi[2])-1])
+            print(" = ", Fraction(conv_cfi[2][len(conv_cfi[2])-1]))
+
+
+            #for j in range(len(conv_cfi[0])):
+            #    print(conv_cfi[0][j], "/", conv_cfi[1][j], end="")
+            #    if(j != len(conv_cfi[0]) - 1):
+            #        print(" + ", end="")
 
 
 # def break_RSA(publicKey):
@@ -155,6 +165,54 @@ def break2(publicKey):
 
     print(cf_)
 
+def check_number_complete(number):
+    
+    return((number-int(number))==0)  #return true or false
+
+def get_phi_n(e,d,k):
+    return (((e*d)-1)/k)
+
+def is_phi_ok(e,d,k):
+    phi_n = get_phi_n(e,d,k)
+    return(check_number_complete(phi_n))
+
+#tells if the solutions of the quadratic equation are complete
+def quadratic_equation(N,phi_n):
+    a = 1
+    b = N-phi_n+1
+    c = N
+    det = b*b-(4*a*c)
+    if(det == 0):
+        #one solution
+        x = (-b)*(2*a)
+        return(check_number_complete(x))
+    elif(det>0):
+        x1 = ((-b)-sqrt(det))/(2*a)
+        x2 = ((-b)+sqrt(det))/(2*a)
+        if(check_number_complete(x1) and check_number_complete(x2)):
+            return True
+        else:
+            return False
+    else:
+        #pas de solution réelle
+        return False
+
+#we check for each convergent if it's the right d
+def check_if_good_d(convergent):
+    d=1
+    e=1
+    k=1
+    N=1
+    phi_n=get_phi_n(e,d,k)
+    
+    #d has to be odd
+    if(d%2==0):
+        return False
+    #then check if phi_n is complete
+    if(is_phi_ok(e,d,k)==False):
+        return False
+    #then check that the quadratic equation is ok
+    return(quadratic_equation(N,phi_n))
 
 if __name__ == "__main__":
     print("Wiener Cryptanalysis")
@@ -169,4 +227,9 @@ if __name__ == "__main__":
     #publicKey = [e,N]
     #print(break_RSA([2621, 8927]))
 
-    print(break2([17993, 90581]))
+    #print(break2([17993, 90581]))
+    #table(100)
+    #print_convergents(50)
+    #print((Fraction(0.25)+Fraction(0.25))[0])
+
+
