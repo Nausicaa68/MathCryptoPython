@@ -248,8 +248,8 @@ if __name__ == "__main__":
     # print((Fraction(0.25)+Fraction(0.25))[0])
 
 
-    e = 1338757187
-    N = 2008226257
+    e = 57262999
+    N = 73277933
 
     x = e/N
     cf_ = continuous_fraction(x)
