@@ -1,5 +1,5 @@
 """
-Function of the chapter 3
+Functions of the chapter 3
 
 Based on the Mathematics for Cryptography class - Efrei Paris
 Course from Nicolas Flasque & Federico Zalamea
@@ -13,6 +13,10 @@ from matrixFunction import ask_for_matrix
 
 
 def pow_mod(x, y, modulo):
+    """
+    x^y [modulo]
+    """
+
     if y == 0:
         return 1
     elif y == 1:
@@ -26,6 +30,11 @@ def pow_mod(x, y, modulo):
 
 
 def totient(n, show=0):
+    """
+    Compute the euler totient with find_all_invert_in_a_ring
+    Brute force algorithm
+    """
+
     invertibles = find_all_invert_in_a_ring(n)[1]
     phiN = len(invertibles)
     if(show != 0):
@@ -35,6 +44,10 @@ def totient(n, show=0):
 
 
 def totient_faster(n, show=0):
+    """
+    Compute the euler totient with optimized technics
+    """
+
     phiN = 1
     if(is_prime(n)):
         phiN = n-1
@@ -66,6 +79,10 @@ def totient_faster(n, show=0):
 
 
 def calculate_RSA_key(p, q, e, show=0):
+    """
+
+    """
+
     if(is_prime(p) and is_prime(q)):
         n = p*q
         phiN = (p-1)*(q-1)
@@ -89,6 +106,10 @@ def calculate_RSA_key(p, q, e, show=0):
 
 
 def calculate_d(publicKey, show=0):
+    """
+
+    """
+
     d = invert_a_number_in_a_ring(
         publicKey[1], totient_faster(publicKey[0], show))
     if(show != 0):
@@ -97,6 +118,10 @@ def calculate_d(publicKey, show=0):
 
 
 def cipher_in_RSA(text, key, show=0):
+    """
+
+    """
+
     change_text = []
     for each in text:
         c = pow_mod(each, key[1], key[0])
@@ -110,6 +135,10 @@ def cipher_in_RSA(text, key, show=0):
 
 
 def is_RSA_key_ok(publicKey, d=0):
+    """
+
+    """
+
     ok = 1
 
     if(is_prime(publicKey[0]) == True):
@@ -205,6 +234,10 @@ def check_authentification_signature_from_A_by_B(publicKeyA, publicKeyB, yAB, dB
 
 
 def equations(power, answer, ring, show=0):
+    """
+
+    """
+
     phi = totient_faster(ring, show)
     invert = invert_a_number_in_a_ring(power, phi)
     x = pow_mod(answer, invert, ring)
@@ -217,6 +250,10 @@ def equations(power, answer, ring, show=0):
 
 
 def exo20_21():
+    """
+
+    """
+
     alice_pub = [133, 41]
     alice_priv = [133, 29]
     bob_pub = [187, 77]
@@ -230,6 +267,9 @@ def exo20_21():
 
 
 def exo23_24(na, ea, da, sa, nb, eb, db, sb, yab):
+    """
+
+    """
 
     da = invert_a_number_in_a_ring(ea, totient_faster(na, 1))
     db = invert_a_number_in_a_ring(eb, totient_faster(nb, 1))
@@ -250,6 +290,10 @@ def exo23_24(na, ea, da, sa, nb, eb, db, sb, yab):
 
 
 def exoChap3():
+    """
+
+    """
+
     print("exoChap3")
 
     exo23_24(209, 13, 0, 10, 221, 25, 0, 21, 98)
@@ -257,7 +301,11 @@ def exoChap3():
 
 
 def main_chap3_v1():
-    print("chap3")
+    """
+
+    """
+
+    print("exo chap3")
 
     #is_RSA_key_ok([2097101, 11111])
 
@@ -313,6 +361,22 @@ def main_chap3_v1():
 
 
 def main_chap3():
+    """
+        Main of the chapter 3
+        Propose : 
+            1 - calculate totient
+            2 - calculate RSA key from p, q and e
+            3 - check a RSA key with n and e
+            4 - check a RSA key with n, e and d
+            5 - check a RSA key with n and d
+            6 - cipher in RSA
+            7 - decipher in RSA
+            8 - calculate a signature
+            9 - check a signature
+            10 - equation like x^5 = 41
+            11 - pow mod
+    """
+
     choice = 0
     while(choice != 99):
 
