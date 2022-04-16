@@ -2,7 +2,7 @@
     Exercise 22 from chapter 3
     Mathematics for Cryptography 
 
-    Author : Nausicaa68
+    Author : Nausicaä
     
 """
 

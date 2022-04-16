@@ -1,5 +1,5 @@
 """
-Function of the chapter 2
+Functions of the chapter 2
 
 Based on the Mathematics for Cryptography class - Efrei Paris
 Course from Nicolas Flasque & Federico Zalamea

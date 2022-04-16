@@ -1,15 +1,26 @@
 """
-Function of the chapter 4
+Functions of the chapter 4
 
 Based on the Mathematics for Cryptography class - Efrei Paris
 Course from Nicolas Flasque & Federico Zalamea
 
-Author of the program : Nausicaa68
+Author of the program : Nausicaä
 
 """
 
 import math
 import chap1Function as ch1f
+
+
+"""
+To-do list : 
+
+find all divisors of a number ex : 10 -> 1 2 5 10
+find inverses and order of all the element of a group
+-> when a^x % n = 1
+find generators (when ord(g) = |G|)
+
+"""
 
 
 def main_chap4():
