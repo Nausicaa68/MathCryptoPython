@@ -4,7 +4,7 @@ Function of the chapter 4
 Based on the Mathematics for Cryptography class - Efrei Paris
 Course from Nicolas Flasque & Federico Zalamea
 
-Author of the program : Nausicaä
+Author of the program : Nausicaa68
 
 """
 
