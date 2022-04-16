@@ -1,5 +1,6 @@
 from chap2Function import main_chap2
 from chap3Function import main_chap3
+from chap4Function import main_chap4
 
 
 if __name__ == "__main__":
