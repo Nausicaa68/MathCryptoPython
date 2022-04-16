@@ -1,5 +1,11 @@
 """
-Function based on the chapter 3
+Function of the chapter 3
+
+Based on the Mathematics for Cryptography class - Efrei Paris
+Course from Nicolas Flasque & Federico Zalamea
+
+Author of the program : Nausicaä
+
 """
 
 from chap1Function import *
@@ -36,6 +42,7 @@ def totient_faster(n, show=0):
             print(n, "is prime : Phi(", n, ") = ", n, "- 1 = ", phiN)
     else:
         allPrimeFactor = prime_factors(n)
+
         if(checkPairwiseCoPrime(allPrimeFactor)):
             if(show != 0):
                 print("Phi(", n, ") = ", end="")
