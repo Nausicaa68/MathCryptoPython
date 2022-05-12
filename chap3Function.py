@@ -80,7 +80,11 @@ def totient_faster(n, show=0):
 
 def calculate_RSA_key(p, q, e, show=0):
     """
-
+    Determine a RSA key with p, q and e
+    Reminder : 
+        n = p*q , where p and q are two different prime numbers
+        e is an invertible number in Z/phi(n)Z
+        d = e(-1) in Z/phi(n)Z
     """
 
     if(is_prime(p) and is_prime(q)):
@@ -107,7 +111,9 @@ def calculate_RSA_key(p, q, e, show=0):
 
 def calculate_d(publicKey, show=0):
     """
-
+    Quick function to compute d in RSA
+    d = e(-1) in Z/phi(n)Z
+    (this function use totient_faster())
     """
 
     d = invert_a_number_in_a_ring(
@@ -119,7 +125,9 @@ def calculate_d(publicKey, show=0):
 
 def cipher_in_RSA(text, key, show=0):
     """
-
+    Cipher/Decipher a text in RSA
+    c = x^e [n] 
+    The key is under the format : [n, e]
     """
 
     change_text = []
@@ -136,7 +144,9 @@ def cipher_in_RSA(text, key, show=0):
 
 def is_RSA_key_ok(publicKey, d=0):
     """
-
+    Check if all the condition to make a good RSA key are fulfil.
+    The algo check the condition on the d only if a value is enter.
+    The key is under the format : [n, e]
     """
 
     ok = 1
@@ -235,7 +245,7 @@ def check_authentification_signature_from_A_by_B(publicKeyA, publicKeyB, yAB, dB
 
 def equations(power, answer, ring, show=0):
     """
-
+    Solve an equation under the format : x^5 = 41
     """
 
     phi = totient_faster(ring, show)
@@ -251,7 +261,7 @@ def equations(power, answer, ring, show=0):
 
 def exo20_21():
     """
-
+    Alice and Bob use the RSA cryptosystem to exchange messages securely.
     """
 
     alice_pub = [133, 41]
@@ -268,7 +278,7 @@ def exo20_21():
 
 def exo23_24(na, ea, da, sa, nb, eb, db, sb, yab):
     """
-
+    Altaïr and Bharani use the RSA cryptosystem.
     """
 
     da = invert_a_number_in_a_ring(ea, totient_faster(na, 1))
@@ -291,21 +301,12 @@ def exo23_24(na, ea, da, sa, nb, eb, db, sb, yab):
 
 def exoChap3():
     """
-
+    main for the exercise
     """
-
     print("exoChap3")
 
     exo23_24(209, 13, 0, 10, 221, 25, 0, 21, 98)
     exo23_24(77, 29, 0, 8, 65, 35, 0, 12, 98)
-
-
-def main_chap3_v1():
-    """
-
-    """
-
-    print("exo chap3")
 
     #is_RSA_key_ok([2097101, 11111])
 
