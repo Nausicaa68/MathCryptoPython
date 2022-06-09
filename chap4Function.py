@@ -9,6 +9,7 @@ Author of the program : Nausicaä
 """
 
 import math
+import re
 from chap1Function import find_all_invert_in_a_ring
 from chap3Function import totient
 from matrixFunction import ask_for_matrix
@@ -36,6 +37,7 @@ def main_chap4():
             2 - decipher in Elgamal
             3 - calculate the order of a number
             4 - calculate the list of the generator
+            5 - check Elgamal data
     """
 
     choice = 0
@@ -46,6 +48,7 @@ def main_chap4():
         print("2 - decipher in Elgamal")
         print("3 - calculate the order of a number")
         print("4 - calculate the list of the generator")
+        print("5 - check Elgamal data")
 
         print("\n99 - Quit\n")
 
@@ -72,7 +75,7 @@ def main_chap4():
             N = int(input("N : "))
 
             print("Information : ")
-            d = int(input("d of the receiver :"))
+            d = int(input("d of the receiver : "))
             r = int(input("r of the message : "))
 
             print("Message : ")
@@ -95,6 +98,15 @@ def main_chap4():
             print("\n")
 
             print("Result = ", calc_generator(N, 1))
+
+        elif(choice == 5):
+            N = int(input("N : "))
+            g = int(input("g : "))
+            e = int(input("e : "))
+            d = int(input("d : "))
+            print("\n")
+
+            print("Result = ", check_Elgamal(N, g, d, e, 1))
 
         elif(choice == 99):
             print("Bye")
@@ -214,6 +226,23 @@ def find_private_key(g, e, N, show=0):
 
     print("All values were passed. Error.\n")
     return -1
+
+
+def check_Elgamal(N, g, d, e, show=0):
+
+    allGen = calc_generator(N, 1)
+
+    if(g not in allGen):
+        print(g, "is not a generator")
+        return False
+
+    power = pow_mod(g, d, N)
+    print(g, "^", d, "[", N, "] =", power)
+    if(power != e):
+        print(power, "!=", e, "so d or e is not correct")
+        return False
+
+    return True
 
 
 def exo43_44():

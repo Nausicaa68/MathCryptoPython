@@ -4,6 +4,7 @@ from chap4Function import main_chap4
 
 
 if __name__ == "__main__":
-    # main_chap2()
     #print(invert_a_number_in_a_ring(21, 125))
-    main_chap4()
+    #main_chap2()
+    main_chap3()
+    #main_chap4()
